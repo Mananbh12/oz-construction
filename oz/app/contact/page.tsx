@@ -51,7 +51,7 @@ export default function Contact() {
     <div className="container">
       <h1>Contactez-nous</h1>
       <p className="mb-8">
-        Vous avez un projet en tête ? Contactez-nous pour discuter de vos besoins en béton et construction.
+        You have a project ? Reach out to us so we can discuss about it !
       </p>
       <div className="form-container">
         <form onSubmit={handleSubmit}>
@@ -65,7 +65,7 @@ export default function Contact() {
           <textarea id="message" name="message" rows={5} required></textarea>
 
           <button type="submit" className="btn" disabled={isSubmitting}>
-            {isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'}
+            {isSubmitting ? 'Sending...' : 'Send'}
           </button>
         </form>
         {status.message && (

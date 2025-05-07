@@ -26,9 +26,8 @@ export function OzNavbar() {
     },
   ];
   return (
-    <div className="relative w-full">
+    <div className="relative w-full h-full flex items-center justify-center">
       <FloatingNav navItems={navItems} />
     </div>
   );
 }
-

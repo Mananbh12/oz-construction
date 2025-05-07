@@ -18,9 +18,9 @@ export default function Services() {
           </p>
         </div>
         <div className="project-card">
-          <h2>Slab Construction</h2>
+          <h2>Best known for</h2>
           <p>
-            Expert slab construction services for all types of buildings, ensuring strength and longevity.
+            Driveways, back patios, sidewalks, pool areas and car ports.
           </p>
         </div>
         <div className="project-card">

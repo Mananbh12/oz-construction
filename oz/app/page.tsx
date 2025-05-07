@@ -12,24 +12,24 @@ export default async function Home() {
   const projects: Project[] = await client.fetch('*[_type == "project"] | order(date desc) [0...3]');
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="bg-gray-50">
       {/* Section Héroïque */}
       <section
-        className="relative bg-cover bg-center h-[500px] flex items-center justify-center text-center"
+        className="relative bg-cover bg-center h-[760px] flex items-center justify-center text-center"
         style={{
           backgroundImage:
-            "linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')",
+            "linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://plus.unsplash.com/premium_photo-1671617779915-80d66fcfe002?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
         }}
       >
         <div className="relative z-10 px-4">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
-            Bienvenue chez Oz
+            Welcome to our website
           </h1>
           <p className="text-xl md:text-2xl text-white mb-6 drop-shadow">
-            Votre expert en béton et construction en Australie
+            Oz, the solution for affordable and reliable concrete work  
           </p>
-          <a href="/contact" className="btn bg-[#3B82F6] text-white hover:bg-[#1F2A44] transition-all duration-300">
-            Contactez-nous
+          <a href="/contact" className="btn bg-[#f59e0b] text-white hover:bg-[#f59e0b] transition-all duration-300">
+            Contact us now !
           </a>
         </div>
       </section>
@@ -37,7 +37,7 @@ export default async function Home() {
       {/* Derniers Projets */}
       <section className="container py-12">
         <h2 className="text-3xl md:text-4xl font-semibold text-[#1F2A44] text-center mb-10">
-          Derniers Projets par Oz
+          Our most recent projects
         </h2>
         <div className="project-grid grid-cols-1 md:grid-cols-3 gap-8">
           {projects.map((project) => (
@@ -56,19 +56,19 @@ export default async function Home() {
                 />
               ) : (
                 <div className="mb-4 h-60 bg-gray-200 flex items-center justify-center text-gray-500 rounded-lg">
-                  Pas d'image disponible
+                  No picture available
                 </div>
               )}
-              <p className="text-gray-600 mb-4 line-clamp-3">{project.description || 'Aucune description disponible'}</p>
+              <p className="text-gray-600 mb-4 line-clamp-3">{project.description || 'No description available'}</p>
               {project.slug?.current ? (
                 <Link
                   href={`/projects/${project.slug.current}`}
-                  className="text-[#3B82F6] hover:text-[#1F2A44] font-medium transition-colors"
+                  className="text-yellow-500 hover:text-[#1F2A44] font-medium transition-colors"
                 >
-                  Voir le Projet
+                  Learn more
                 </Link>
               ) : (
-                <span className="text-gray-500 italic">Détails indisponibles</span>
+                <span className="text-gray-500 italic">Details unavailable</span>
               )}
             </div>
           ))}
