@@ -1,12 +1,20 @@
 import sanityClient from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 
+// Charger les variables d'environnement
+const {
+  SANITY_PROJECT_ID,
+  SANITY_DATASET,
+  SANITY_API_VERSION,
+  SANITY_TOKEN
+} = process.env;
+
 export const client = sanityClient({
-  projectId: 'l5be0f11', 
-  dataset: 'production',
-  apiVersion: '2023-05-03',
+  projectId: SANITY_PROJECT_ID,
+  dataset: SANITY_DATASET,
+  apiVersion: SANITY_API_VERSION,
   useCdn: true,
-  token: 'skDmtpAhYK34i2cLtbun9VbS8iEGXz2noUqUm6a5h2iY4eiOuqYrsqWsJJEOXrdqojZ9WnG7F4B67GE25RcmJ4MvdNZFryxhL960RRpnWJzjWMLP7Pgo2L1IFTJ1HmCx9uEMsuynVEjwBibGPuobg9Xolb2JQse8AH9sheh67h0oPo9rYRjc', 
+  token: SANITY_TOKEN,
 });
 
 const builder = imageUrlBuilder(client);
