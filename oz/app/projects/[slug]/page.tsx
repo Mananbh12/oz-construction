@@ -2,12 +2,6 @@ import { client, urlFor } from '../../../lib/sanity';
 import { Project } from '../../../types';
 import Image from 'next/image';
 
-type Params = {
-  params: {
-    slug: string;
-  };
-};
-
 export async function generateStaticParams() {
   const projects = await client.fetch('*[_type == "project"]{slug}');
   return projects
@@ -17,10 +11,11 @@ export async function generateStaticParams() {
     }));
 }
 
-export async function generateMetadata({ params }: Params) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params; // Attendre params
   const project: Project = await client.fetch(
     '*[_type == "project" && slug.current == $slug][0]',
-    { slug: params.slug }
+    { slug }
   );
 
   return {
@@ -31,10 +26,11 @@ export async function generateMetadata({ params }: Params) {
   };
 }
 
-export default async function ProjectDetail({ params }: Params) {
+export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params; // Attendre params
   const project: Project = await client.fetch(
     '*[_type == "project" && slug.current == $slug][0]',
-    { slug: params.slug }
+    { slug }
   );
 
   if (!project || !project.slug?.current) {
