@@ -2,6 +2,12 @@ import { client, urlFor } from '../../../lib/sanity';
 import { Project } from '../../../types';
 import Image from 'next/image';
 
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
 export async function generateStaticParams() {
   const projects = await client.fetch('*[_type == "project"]{slug}');
   return projects
@@ -11,7 +17,7 @@ export async function generateStaticParams() {
     }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: PageProps) {
   const project: Project = await client.fetch(
     '*[_type == "project" && slug.current == $slug][0]',
     { slug: params.slug }
@@ -19,11 +25,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   return {
     title: `${project?.title || 'Project'} - Oz Concrete and Construction`,
-    description: project?.description || 'Discover the details of this project by Oz, showcasing our expertise in concrete and construction in Australia.',
+    description:
+      project?.description ||
+      'Discover the details of this project by Oz, showcasing our expertise in concrete and construction in Australia.',
   };
 }
 
-export default async function ProjectDetail({ params }: { params: { slug: string } }) {
+export default async function ProjectDetail({ params }: PageProps) {
   const project: Project = await client.fetch(
     '*[_type == "project" && slug.current == $slug][0]',
     { slug: params.slug }
@@ -54,10 +62,14 @@ export default async function ProjectDetail({ params }: { params: { slug: string
       <p>{project.description}</p>
       {project.date && (
         <p>
-          <strong>Completed on:</strong> {new Date(project.date).toLocaleDateString()}
+          <strong>Completed on:</strong>{' '}
+          {new Date(project.date).toLocaleDateString()}
         </p>
       )}
-      <a href="/projects" className="text-yellow-500 hover:text-gray-700 mt-4 inline-block">
+      <a
+        href="/projects"
+        className="text-yellow-500 hover:text-gray-700 mt-4 inline-block"
+      >
         ← Back to Projects
       </a>
     </div>
